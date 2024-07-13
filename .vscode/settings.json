@@ -1,0 +1,49 @@
+{
+  "files.associations": {
+    ".editorconfig": "yaml",
+    ".env": "yaml",
+    ".env.*": "yaml"
+  },
+  "files.exclude": {
+    "/.git": true,
+    "/.svn": true,
+    "/.hg": true,
+    "/CVS": true,
+    "/.DS_Store": true,
+    "/Thumbs.db": true,
+    "node_modules": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.probe": [
+    "javascript",
+    "javascriptreact",
+    "typescriptreact",
+    "typescript",
+    "react"
+  ],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescriptreact",
+    "typescript"
+  ],
+  "editor.codeActionsOnSave": [
+    "source.organizeImports",
+    "source.formatDocument",
+    "source.fixAll.eslint"
+  ],
+  "eslint.alwaysShowStatus": true,
+  "editor.formatOnSave": true
+}
