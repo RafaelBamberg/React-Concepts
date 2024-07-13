@@ -2,20 +2,21 @@
 import React from "react";
 
 import CharactersCard from "./components/CharactersCard";
-import useRickAndMortyCharacters from "./Hooks/useCharacters/useCharacters";
+import useCharacters from "./Hooks/useCharacters/useCharacters";
 
 const App: React.FC = () => {
-  const {
-    data: characters,
-    isLoading,
-    isError,
-    error,
-  } = useRickAndMortyCharacters();
+  const { data: characters, isLoading, isError, error } = useCharacters();
+
+  console.log(characters);
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error: {error?.message}</div>;
 
-  return <CharactersCard characters={characters ?? []} />;
+  return (
+    <div>
+      {characters && <CharactersCard characters={characters.results} />}
+    </div>
+  );
 };
 
 export default App;

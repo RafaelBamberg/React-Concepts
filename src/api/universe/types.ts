@@ -1,20 +1,29 @@
-export interface Character {
+export type Info = {
+  count: number;
+  pages: number;
+  next: string;
+  prev?: null;
+};
+export type ResultsEntity = {
   id: number;
   name: string;
   status: string;
   species: string;
   type: string;
   gender: string;
-  origin: {
-    name: string;
-    url: string;
-  };
-  location: {
-    name: string;
-    url: string;
-  };
+  origin: OriginOrLocation;
+  location: OriginOrLocation;
   image: string;
-  episode: string[];
+  episode?: string[] | null;
   url: string;
   created: string;
-}
+};
+export type OriginOrLocation = {
+  name: string;
+  url: string;
+};
+
+export type Character = {
+  info: Info;
+  results: ResultsEntity[] | null;
+};

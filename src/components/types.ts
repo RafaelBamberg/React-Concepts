@@ -1,5 +1,5 @@
-import { Character } from "../api/universe/types";
+import { ResultsEntity } from "../api/universe/types";
 
 export type CharacterCardProps = {
-  characters: Character[];
+  characters: ResultsEntity[] | null;
 };
