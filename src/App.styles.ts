@@ -12,3 +12,9 @@ export const LoadingContainer = styled.div`
   margin-right: auto;
   margin-top: 430px;
 `;
+
+export const LoadingPaginationContainer = styled.div`
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+`;

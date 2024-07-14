@@ -1,12 +1,18 @@
-import { CircularProgress } from "@mui/material";
-import { useEffect } from "react";
+import { CircularProgress, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { ResultsEntity } from "./api/universe/types";
-import { LoadingContainer, Wrapper } from "./App.styles";
+import {
+  LoadingContainer,
+  LoadingPaginationContainer,
+  Wrapper,
+} from "./App.styles";
 import CharactersCard from "./components/CharactersCard/CharactersCard";
-import SearchAppBar from "./components/SearchAppBar/SearchAppBar";
 import useCharacters from "./Hooks/useCharacters/useCharacters";
 
-const App = () => {
+const App: React.FC = () => {
+  const [query, setQuery] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
   const {
     data,
     isLoading,
@@ -15,7 +21,8 @@ const App = () => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useCharacters();
+    refetch,
+  } = useCharacters(searchTerm);
 
   useEffect(() => {
     const handleLoadMore = () => {
@@ -43,6 +50,16 @@ const App = () => {
       page.results?.filter((result) => result !== null)
     ) as ResultsEntity[]) || [];
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSearchTerm(query);
+    refetch();
+  };
+
   console.log(characters);
 
   if (isLoading && characters.length === 0)
@@ -56,9 +73,21 @@ const App = () => {
 
   return (
     <Wrapper>
-      <SearchAppBar />
+      <form onSubmit={handleSearchSubmit}>
+        <TextField
+          label="Search Characters"
+          value={query}
+          onChange={handleSearchChange}
+          variant="outlined"
+          fullWidth
+        />
+      </form>
       <CharactersCard characters={characters} />
-      {isFetchingNextPage && <CircularProgress />}
+      {isFetchingNextPage && (
+        <LoadingPaginationContainer>
+          <CircularProgress />
+        </LoadingPaginationContainer>
+      )}
     </Wrapper>
   );
 };
