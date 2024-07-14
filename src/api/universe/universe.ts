@@ -3,11 +3,7 @@ import * as T from "./types";
 
 const API_URL = "https://rickandmortyapi.com/api/character";
 
-const delay = (miliSeconds: number) =>
-  new Promise((resolve) => setTimeout(resolve, miliSeconds));
-
-export const getCharacters = async (): Promise<T.Character> => {
-  await delay(2000);
-  const response = await axios.get<T.Character>(API_URL);
+export const getCharacters = async (page: number): Promise<T.Character> => {
+  const response = await axios.get<T.Character>(`${API_URL}/?page=${page}`);
   return response.data;
 };
