@@ -1,7 +1,10 @@
 // RickAndMortyCharactersContainer.tsx
 import React from "react";
 
-import CharactersCard from "./components/CharactersCard";
+import { CircularProgress } from "@mui/material";
+import { LoadingContainer, Wrapper } from "./App.styles";
+import CharactersCard from "./components/CharactersCard/CharactersCard";
+import SearchAppBar from "./components/SearchAppBar/SearchAppBar";
 import useCharacters from "./Hooks/useCharacters/useCharacters";
 
 const App: React.FC = () => {
@@ -9,13 +12,23 @@ const App: React.FC = () => {
 
   console.log(characters);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <LoadingContainer>
+        <CircularProgress />
+      </LoadingContainer>
+    );
   if (isError) return <div>Error: {error?.message}</div>;
 
   return (
-    <div>
-      {characters && <CharactersCard characters={characters.results} />}
-    </div>
+    <Wrapper>
+      <SearchAppBar />
+      {characters ? (
+        <CharactersCard characters={characters.results} />
+      ) : (
+        <CircularProgress />
+      )}
+    </Wrapper>
   );
 };
 
