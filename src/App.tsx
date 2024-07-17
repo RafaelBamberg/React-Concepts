@@ -24,43 +24,43 @@ const App: React.FC = () => {
     refetch,
   } = useCharacters(searchTerm);
 
-  useEffect(() => {
-    const handleLoadMore = () => {
-      if (hasNextPage) {
-        fetchNextPage();
-      }
-    };
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop !==
-        document.documentElement.offsetHeight
-      )
-        return;
-      handleLoadMore();
-    };
+  const characters: ResultsEntity[] =
+    data?.pages.flatMap((page) =>
+      (page.results ?? []).filter((result) => result !== null)
+    ) || [];
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [fetchNextPage, hasNextPage]);
-
-  const characters =
-    (data?.pages.flatMap((page) =>
-      page.results?.filter((result) => result !== null)
-    ) as ResultsEntity[]) || [];
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setQuery(e.target.value);
   };
 
-  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     setSearchTerm(query);
     refetch();
   };
 
-  console.log(characters);
+  const handleRefetch = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    refetch();
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.offsetHeight - 2
+      ) {
+        fetchNextPage();
+      }
+    };
+    setSearchTerm(query);
+    refetch();
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [fetchNextPage, hasNextPage, query, refetch]);
 
   if (isLoading && characters.length === 0)
     return (
@@ -69,7 +69,13 @@ const App: React.FC = () => {
       </LoadingContainer>
     );
 
-  if (isError) return <div>Error: {error?.message}</div>;
+  if (isError)
+    return (
+      <div>
+        <p>Error: {error?.message}</p>
+        <button onClick={handleRefetch}>Retry</button>
+      </div>
+    );
 
   return (
     <Wrapper>

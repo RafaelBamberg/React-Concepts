@@ -1,19 +1,18 @@
 import {
-  Button,
   Card,
   CardActionArea,
-  CardActions,
   CardContent,
   CardMedia,
   Typography,
 } from "@mui/material";
+import { useMemo } from "react";
 import { ListStyled } from "./CharacterCard.styles";
 import { CharacterCardProps } from "./types";
 
-const CharactersCard = ({ characters }: CharacterCardProps) => (
-  <div>
-    <ListStyled>
-      {characters?.map((character) => (
+const CharactersCard = ({ characters }: CharacterCardProps) => {
+  const characterCards = useMemo(
+    () =>
+      characters?.map((character) => (
         <li key={character.id}>
           <Card sx={{ maxWidth: 345 }}>
             <CardActionArea>
@@ -32,16 +31,17 @@ const CharactersCard = ({ characters }: CharacterCardProps) => (
                 </Typography>
               </CardContent>
             </CardActionArea>
-            <CardActions>
-              <Button size="small" color="primary">
-                Share
-              </Button>
-            </CardActions>
           </Card>
         </li>
-      ))}
-    </ListStyled>
-  </div>
-);
+      )),
+    [characters]
+  );
+
+  return (
+    <div>
+      <ListStyled>{characterCards}</ListStyled>
+    </div>
+  );
+};
 
 export default CharactersCard;
