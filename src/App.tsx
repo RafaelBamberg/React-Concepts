@@ -29,19 +29,17 @@ const App: React.FC = () => {
       (page.results ?? []).filter((result) => result !== null)
     ) || [];
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setQuery(e.target.value);
+  const handleSearchChange = (
+    searchEvent: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setQuery(searchEvent.target.value);
   };
 
-  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
+  const handleSearchSubmit = (
+    formEvent: React.FormEvent<HTMLFormElement>
+  ): void => {
+    formEvent.preventDefault();
     setSearchTerm(query);
-    refetch();
-  };
-
-  const handleRefetch = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
     refetch();
   };
 
@@ -73,7 +71,7 @@ const App: React.FC = () => {
     return (
       <div>
         <p>Error: {error?.message}</p>
-        <button onClick={handleRefetch}>Retry</button>
+        <button onClick={() => refetch()}>Retry</button>
       </div>
     );
 

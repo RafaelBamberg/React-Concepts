@@ -5,11 +5,14 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { useMemo } from "react";
-import { ListStyled } from "./CharacterCard.styles";
+import { useMemo, useRef } from "react";
+import { CounterWrapperStyled, ListStyled } from "./CharacterCard.styles";
 import { CharacterCardProps } from "./types";
 
 const CharactersCard = ({ characters }: CharacterCardProps) => {
+  const renderCount = useRef(0);
+  renderCount.current += 1;
+
   const characterCards = useMemo(
     () =>
       characters?.map((character) => (
@@ -39,6 +42,10 @@ const CharactersCard = ({ characters }: CharacterCardProps) => {
 
   return (
     <div>
+      <CounterWrapperStyled>
+        Counter: {renderCount.current}
+      </CounterWrapperStyled>
+
       <ListStyled>{characterCards}</ListStyled>
     </div>
   );
