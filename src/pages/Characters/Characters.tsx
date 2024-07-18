@@ -1,15 +1,15 @@
 import { CircularProgress, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { ResultsEntity } from "./api/universe/types";
+import { ResultsEntity } from "../../api/universe/types";
+import CharactersCard from "../../components/CharactersCard/CharactersCard";
+import useCharacters from "../../Hooks/useCharacters/useCharacters";
 import {
   LoadingContainer,
   LoadingPaginationContainer,
   Wrapper,
-} from "./App.styles";
-import CharactersCard from "./components/CharactersCard/CharactersCard";
-import useCharacters from "./Hooks/useCharacters/useCharacters";
+} from "./Characters.styles";
 
-const App: React.FC = () => {
+const Characters = () => {
   const [query, setQuery] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -96,4 +96,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default Characters;

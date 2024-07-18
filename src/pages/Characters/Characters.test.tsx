@@ -3,8 +3,8 @@
 import "@testing-library/jest-dom";
 import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import App from "./App";
-import useCharacters from "./Hooks/useCharacters/useCharacters";
+import useCharacters from "../../Hooks/useCharacters/useCharacters";
+import App from "./Characters";
 
 jest.mock("./Hooks/useCharacters/useCharacters");
 

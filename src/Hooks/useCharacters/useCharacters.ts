@@ -8,13 +8,18 @@ const useCharacters = (characterName: string) => {
     ({ pageParam = 1 }) => getCharacters(pageParam, characterName),
     {
       getNextPageParam: (lastPage) => {
-        const nextPage = lastPage.info.next
+        return lastPage.info.next
           ? new URL(lastPage.info.next).searchParams.get("page")
           : null;
-        return nextPage ? parseInt(nextPage) : undefined;
       },
     }
   );
 };
 
 export default useCharacters;
+
+// comentario 1
+// comentario 1
+// comentario 1
+// comentario 1
+// comentario 1
