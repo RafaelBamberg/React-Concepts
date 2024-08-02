@@ -17,9 +17,13 @@ const useCharacters = (characterName: string) => {
 };
 
 export default useCharacters;
+<<<<<<< Updated upstream
 
 // comentario 1
 // comentario 1
 // comentario 1
 // comentario 1
 // comentario 1
+=======
+////asdsadsadasdsadsadsa
+>>>>>>> Stashed changes
