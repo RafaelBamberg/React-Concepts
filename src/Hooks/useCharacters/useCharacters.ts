@@ -17,10 +17,3 @@ const useCharacters = (characterName: string) => {
 };
 
 export default useCharacters;
-
-// comentario 1
-// comentario 1
-// comentario 1
-// comentario 1
-// comentario 1
-////asdsadsadasdsadsadsa
